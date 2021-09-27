@@ -23,7 +23,6 @@ $('#user-home-link').click(function(e){
 
 $('#user-research-link').click(function(e){    
     $('#user-bio-main').stop().fadeOut('slow', function(){
-        $("ul.chart").hBarChart();
         $('#user-bio-main').removeClass('d-flex');
         $('#user-publications').hide();
         $('#user-research-link').addClass('active');
@@ -39,24 +38,15 @@ function newPopup(url) {
         url,'popUpWindow','height=600,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
 }
 
-$("ul.chart").hBarChart({
 
-    // background color
-    bgColor: 'gray',
-  
-    // text color
-    textColor: '#fff',
-  
-    // label,data,both
-    show: 'label',
-  
-    // re-sort according to your data
-    sorting: false,
-  
-    // style your maximum value bar
-    maxStyle: {
-      bg: 'green',
-      text: 'white'
-    }
-    
-  });
+$('#example').simpleBarGraph({
+    data: [
+        { key: 'Citations in 2021', value: 141 },
+        { key: 'Citations in 2020', value: 48 },
+        { key: 'Citations in 2019', value: 9 },
+        { key: 'Citations in 2018', value: 1 },
+    ],
+    height: "300px",
+    barsColor: '#d1b100',
+    rowCaptionsWidth: "34px",
+});
