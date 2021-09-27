@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="img/logo.png">
+        <title>Jack Ghannam | Harvard</title>
+
+        <!-- List of scripts and style sheets -->
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/hBarChart.js"></script>
+        <script src="js/functions.js" defer></script>
+
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+        <link rel="stylesheet" href="css/progress-bar.css">
+        <link rel="stylesheet" href="css/styles.css">
+
+        <link href="http://fonts.cdnfonts.com/css/sansblack" rel="stylesheet">
+                
+    </head>
+
+    <body>
+        <!-- Content for Navigation Menu -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top pb-4">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">&emsp;&emsp;&emsp;
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" href="#" id="user-home-link">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="user-publication-link">Publications</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="user-research-link">Research</a>
+                    </li>
+
+                    <img src="img/logo2.png" id="nav-logo"/>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="user-research-link">Experience</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="infoNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Information
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="infoNavbarDropdown">
+                            <a class="dropdown-item" href="#">Link 1</a>
+                            <a class="dropdown-item" href="#">Link 2</a>                   
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="infoNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Contact
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="infoNavbarDropdown">
+                            <a class="dropdown-item" href="#">Link 1</a>
+                            <a class="dropdown-item" href="#">Link 2</a>   
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Content for Body -->
+        <div class="container-fluid pt-5 align-items-center" id="user-container">
+            <div class="container-fluid pt-5 pb-5 pl-3 d-flex justify-content-center" id="user-bio-main">
+                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 75rem;" id="user-bio-card">
+                    <div class="card-header text-center">
+                        <div class="row justify-content-center">
+                            <div class="col"><hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #b69857, #f3d98f);margin-top: 30px;"></div>
+                            <div class="col justify-content-center d-inline" ><div class="row justify-content-center"><h1 style="font-family: 'SansBlack', sans-serif;">JACK </h1>&nbsp;&nbsp;&nbsp;<h1 style="font-family: 'SansBlack', sans-serif;">GHANNAM</h1></div></div>
+                            <div class="col"><hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #f3d98f, #b69857);margin-top: 30px;"></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                            <img src="img/profile.jpg" id="body-logo" alt="Image Logo in Body" />
+                            <span class="span-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in vulputate diam, ut ultrices odio. Aliquam nec quam ultricies, tristique odio eget, volutpat ante. 
+                            Integer in enim sed nisl dignissim gravida. Sed sodales tincidunt magna, porta molestie ante pellentesque id. Curabitur mollis mauris a ante aliquam imperdiet. 
+                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed lobortis ex et velit cursus efficitur.</span><br />
+
+                            <span>Maecenas id scelerisque leo. In aliquet mauris et hendrerit tristique. Duis ullamcorper, neque in gravida vehicula, lorem sem facilisis magna, ac cursus augue 
+                            tellus sed odio. Donec viverra consequat nibh, vel egestas tortor condimentum vitae. Cras id dictum erat. Fusce aliquet tortor libero, vitae dictum metus porta vel. 
+                            Phasellus congue purus felis, quis mollis lectus volutpat eget. Proin non sollicitudin augue.</span><br />
+                            
+                            <span>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum id euismod ante, tincidunt hendrerit velit. Etiam mollis 
+                            quam ac diam tempus commodo. Cras vehicula suscipit magna, ac pulvinar ex cursus nec. Nunc egestas ligula ac massa auctor dapibus. Duis ornare semper scelerisque. 
+                            Maecenas ac facilisis ligula. Curabitur ut felis sed velit tincidunt gravida at in dui. Morbi id arcu vel libero porta consequat. In laoreet turpis nisl, at feugiat 
+                            libero iaculis sed. Sed suscipit pellentesque condimentum. Cras nec pellentesque lorem. Vestibulum nunc nunc, tempor id dolor tristique, molestie aliquet tellus.</span><br />
+                            
+                            <span>Maecenas ullamcorper tellus id lorem convallis ultricies. Donec diam augue, sagittis porta pretium a, pretium eu erat. Maecenas dapibus mauris sapien, sit amet 
+                            consectetur augue feugiat a. Sed sed ultrices sapien. Etiam tempor, felis non varius tempor, mi dolor egestas dolor, id efficitur neque diam sit amet sem.
+                            Aenean mattis vitae ipsum non tempor. Phasellus pretium sagittis malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer orci magna, 
+                            pulvinar ut dolor et, malesuada semper risus. In interdum malesuada suscipit. Nulla facilisi. Nunc luctus, neque sagittis venenatis congue, lacus quam feugiat lacus, 
+                            in ornare augue urna nec augue. Nunc dignissim viverra ex, et placerat leo pharetra eget.</span>
+
+                            <div class="row pt-5">
+                                <div class="col">
+                                    <h3><i class="fa-solid fa-graduation-cap"></i> EDUCATION</h3>
+                                    <b>HARVARD MEDICAL SCHOOL</b><br>
+                                    Harvard/MIT MD-PhD Program<br>
+                                    MD-PhD Student<br><br>
+
+                                    <b>LOYOLA UNIVERISITY CHICAGO</b><br>
+                                    Bachelor of Science, Biology<br>
+                                    GPA: 4.0 | MCAT (524)
+
+                                </div>
+                                <div class="col">
+                                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> PROFICIENCIES</h3>
+                                    <div class="row">
+                                        <div class="col">
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Prism<br>
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Excel<br>
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Cinema 4d<br>
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Parallels<br>
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Sony Vegas<br>
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Rain Drop Analyst II<br><br>
+                                        </div>
+                                        <div class="col">
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Hardware implementation<br>
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Spanish (intermediate)<br>
+                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Arabic (proficient)<br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="container-fluid" id="user-publications">
+                <main role="main">
+                    <section class="jumbotron text-center">
+                      <div class="container">
+                        <h1>List of Publications</h1>
+                        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+                        <div class="container" style="width: 40rem;">
+                        <ul class="chart">
+                            <li data-data="141">
+                                2021 - 141 Citations
+                            </li>
+                            <li data-data="34">
+                                2020 - 48 Citations
+                            </li>
+                            <li data-data="9">
+                                2019 - 9 Citations
+                            </li>
+                            <li data-data="80">
+                                CSS/CSS3
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    </section>
+                  
+                    <div class="album py-5 bg-light">
+                      <div class="container">
+                  
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <img src="img/article-1-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Impact of conditioning intensity of allogeneic transplantation for acute myeloid leukemia with genomic evidence of residual disease</h5>
+                                <p class="card-text">
+                                <small class="text-muted">CS Hourigan, LW Dillon, G Gui, BR Logan, M Fei, J Ghannam, Y Li, ...
+                                    Journal of Clinical Oncology 38 (12), 1273-1283</small>
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://experts.umn.edu/en/publications/impact-of-conditioning-intensity-of-allogeneic-transplantation-fo')">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=3583663336928223602')">Citations</button>
+                                    <a href="docs/jco.19.03011.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                                  </div>
+                                  <small class="text-muted">2020</small>
+                                </div>
+                              </div>
+                                <div class="w3-light-grey">
+                                    <div class="w3-container w3-green w3-center" style="width:100%;">111 citations</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <img src="img/article-2-cover.GIF" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">A Series of 4-and 5-Coordinate Ni (II) Complexes: Synthesis, Characterization, Spectroscopic, and DFT Studies</h5>
+                                <p class="card-text">
+                                <small class="text-muted">J Ghannam, T Al Assil, TC Pankratz, RL Lord, M Zeller, WT Lee
+                                    Inorganic chemistry 57 (14), 8307-8316</small>
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1rU4A7Tt9Obc7GfgecugQGu578ckvUj83/view')">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=3583663336928223602')">Citations</button>
+                                  </div>
+                                  <small class="text-muted">2018</small>
+                                </div>
+                              </div>
+                                <div class="w3-light-grey">
+                                    <div class="w3-container w3-green w3-center" style="width:100%;">17 citations</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <img src="img/article-3-cover.jpg" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title">Baseline TP53 mutations in adults with SCD developing myeloid malignancy following hematopoietic cell transplantation</h5>
+                                <p class="card-text">
+                                <small class="text-muted">JY Ghannam, X Xu, I Maric, L Dillon, Y Li, MM Hsieh, CS Hourigan, ...
+                                    Blood 135 (14), 1185-1188</small><br><br>
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1qVAHKxeLybYInNwS9LXAQrWChj1_hGtv/view')">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5038628723639452888')">Citations</button>
+                                  </div>
+                                  <small class="text-muted">2020</small>
+                                </div>
+                              </div>
+                                <div class="w3-light-grey">
+                                    <div class="w3-container w3-green w3-center" style="width:100%;">15 citations</div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                          
+                        </div>
+                      </div>
+                    </div>
+                  
+                  </main>
+            </div>
+
+
+
+
+            <div class="container-fluid" id="user-research">
+                <section class="jumbotron text-center">
+                    <div class="container">
+                      <h1>Research</h1>
+                      <p class="lead text-muted">Included is a comprehensive list of research—locations, time spent, content, etc. Also included are links to published research. For more information, please contact Jack Ghannam!</p>
+                      <p>
+                        <a href="https://www.researchgate.net/scientific-contributions/Jack-Ghannam-2166556950" target="_blank" class="btn btn-primary my-2">ResearchGate - NIH</a>
+                        <a href="https://www.researchgate.net/scientific-contributions/Jack-Ghannam-2144584008" target="_blank" class="btn btn-secondary my-2">ResearchGate - Loyola</a>
+                      </p>
+                    </div>
+                  </section>
+            <div class="container-fluid pb-4" style="width: 75rem;">
+                <div id="accordion">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button class="btn text-info float-start shadow-none" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Dr. Linda Bi Lab and Dr. Ramen Beroukhim Labs | May 2021 - Present<br>
+                            <small class="text-muted float-start">BWH, DFCI and the Broad Institute, MD-PhD Rotation Student | Boston, MA</small>
+                          </button>
+                        </h5>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            Apply genomic and cancer biology approaches to define the molecular taxonomy and tumor microenvironment of skull base tumors. Further developing my understanding of tumor cell evolution and their acquisition of resistance to innate immune mechanisms as well as administered treatments. Define molecular markers with diagnostic and prognostic potential to track brain tumors across time and to develop improved therapeutic options. <br><br>
+                            <ul>
+                                <li>My current rotation project with Dr. Lind Bi and Dr. Rameen Beroukhim entails studying the genomic drivers and microenvironment of meningioma and other CNS tumors (e.g., glioma). My primary project has been the implementation and application of a novel algorithm to a cohort of over 1000 meningioma microarray samples to identify new drivers of tumorigenesis, in addition to evaluating the selective pressure driving aneuploidy in meningioma</li>
+                                <li>Secondary projects include interrogating the role of a TERT promotor mutation in the recurrence of meningioma, and in particular recurrence of meningioma into higher grade tumors. This entails wet-lab work, and ultimately the sequencing and analysis of 200-500 meningioma samples</li>
+                                <li>Tertiary projects include collaborations with the David A. Barbie to leverage their organoid system to assess meningioma immune microenvironment, and in particular the role of innate immune system cells in tumorigenesis in addition to the impact that STING agonists could play in potential treatment</li>
+                                <li>Assist master’s student in the wet-lab component of thesis project</li>
+                                <li> Learned the fundamentals of how to use the R programming language for purposes of biomedical research</li>
+                            </ul>
+                            
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Collapsible Group Item #2
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Collapsible Group Item #3
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+            
+        <!-- Content for Footer Bar -->
+        <div class="bg-dark text-lg-start text-muted p-3">
+            Created by <span class="text-white">Jack Ghannam</span>
+        </div>
+    </body>
+</html>
