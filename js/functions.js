@@ -41,8 +41,8 @@ function newPopup(url) {
 
 $('#example').simpleBarGraph({
     data: [
-        { key: 'Citations in 2021', value: 141 },
-        { key: 'Citations in 2020', value: 48 },
+        { key: 'Citations in 2021', value: 147 },
+        { key: 'Citations in 2020', value: 49 },
         { key: 'Citations in 2019', value: 9 },
         { key: 'Citations in 2018', value: 1 },
     ],
