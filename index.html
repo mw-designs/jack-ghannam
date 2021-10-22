@@ -1,691 +1,1292 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="img/logo.png">
-        <title>Jack Ghannam | Harvard</title>
 
-        <!-- List of scripts and style sheets -->
-        <script
-        src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-        <script src="js/jquery.simple-bar-graph.min.js"></script>
-        <script src="js/functions.js" defer></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img/logo.png">
+  <title>Jack Ghannam | Harvard</title>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-        <link rel="stylesheet" href="css/progress-bar.css">
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/jquery.simple-bar-graph.min.css">
+  <!-- List of scripts and style sheets -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+  <script src="js/jquery.simple-bar-graph.min.js"></script>
+  <script src="js/functions.js" defer></script>
 
-        <link href="http://fonts.cdnfonts.com/css/sansblack" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+  <link rel="stylesheet" href="css/progress-bar.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/jquery.simple-bar-graph.min.css">
 
-        <style>
-a, a:hover {
-  text-decoration: none;
-}
+  <link href="http://fonts.cdnfonts.com/css/sansblack" rel="stylesheet" defer>
 
-a:hover {
-  opacity: 0.8;
-}
-        </style>
-                
-    </head>
+  <style>
+    .flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 90%;
+    perspective: 1000px;
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    z-index: -2;
+  }
+  
+  .flip-card:active .flip-card-inner {
+    transform: rotateY(180deg);
+    z-index: -2;
+  }
+  
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-front {
+    background-color: #bbb;
+    color: black;
+  }
+  
+  .flip-card-back {
+    background-color: #2980b9;
+    color: white;
+    transform: rotateY(180deg);
+  }
+  </style>
+</head>
 
-    <body>
-        <!-- Content for Navigation Menu -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top pb-4">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<body>
+  <!-- Content for Navigation Menu -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top pb-4">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">&emsp;&emsp;&emsp;
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">&emsp;&emsp;&emsp;
+        <li class="nav-item dropdown"><a class="nav-link active" href="#" id="user-home-link">Home</a></li>
+        <li class="nav-item dropdown"><a class="nav-link" href="#" id="user-publication-link">Publications</a></li>
+        <li class="nav-item dropdown"><a class="nav-link" href="#" id="user-research-link">Research</a></li>
+        <img src="img/logo2.png" id="nav-logo" />
+        <li class="nav-item dropdown"><a class="nav-link" href="#" id="user-experience-link">Other Experience</a></li>
+        <li class="nav-item dropdown"><a class="nav-link" href="#" id="user-awards-link">Honors</a></li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link active" href="#" id="user-home-link">Home</a>
-                    </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Contact</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="mailto:ghannamjy@gmail.com">Email</a></li>
+            <li><a class="dropdown-item" href="https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en" target="_BLANK">Google Scholar</a></li>
+            <li><a class="dropdown-item" href="https://orcid.org/0000-0003-0275-9099" target="_BLANK">ORCID</a></li>
+            <li><a class="dropdown-item" href="mailto:jack.ghannam@nih.gov">NIH</a></li>
+            <li>
+              <hr class="dropdown-divider mx-2">
+            </li>
+            <li><a class="dropdown-item" href="https://www.youtube.com/channel/UCDokvFeHerkfRyioizU_EVg" target="_BLANK">Youtube</a></li>
+            <li><a class="dropdown-item" href="#" target="_BLANK">LinkedIn</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="user-publication-link">Publications</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="user-research-link">Research</a>
-                    </li>
-
-                    <img src="img/logo2.png" id="nav-logo"/>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="user-research-link">Experience</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="infoNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Information
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="infoNavbarDropdown">
-                            <a class="dropdown-item" href="#">Link 1</a>
-                            <a class="dropdown-item" href="#">Link 2</a>                   
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="infoNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Contact
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="infoNavbarDropdown">
-                            <a class="dropdown-item" href="#">Link 1</a>
-                            <a class="dropdown-item" href="#">Link 2</a>   
-                        </div>
-                    </li>
-                </ul>
+  <!-- Content for Biography -->
+  <div class="container-fluid pt-5 align-items-center" id="user-container">
+    <div class="container-fluid pt-5 pb-5 pl-3 d-flex justify-content-center" id="user-bio-main">
+      <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 75rem;" id="user-bio-card">
+        <div class="card-header text-center">
+          <div class="row justify-content-center">
+            <div class="col">
+              <hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #b69857, #f3d98f);margin-top: 30px;">
             </div>
-        </nav>
-
-        <!-- Content for Body -->
-        <div class="container-fluid pt-5 align-items-center" id="user-container">
-            <div class="container-fluid pt-5 pb-5 pl-3 d-flex justify-content-center" id="user-bio-main">
-                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 75rem;" id="user-bio-card">
-                    <div class="card-header text-center">
-                        <div class="row justify-content-center">
-                            <div class="col"><hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #b69857, #f3d98f);margin-top: 30px;"></div>
-                            <div class="col justify-content-center d-inline" ><div class="row justify-content-center"><h1 style="font-family: 'SansBlack', sans-serif; margin-top: 10px;">JACK GHANNAM</h1></div></div>
-                            <div class="col"><hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #f3d98f, #b69857);margin-top: 30px;"></div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                            <img src="img/profile.jpg" id="body-logo" alt="Image Logo in Body" />
-                            <span class="span-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in vulputate diam, ut ultrices odio. Aliquam nec quam ultricies, tristique odio eget, volutpat ante. 
-                            Integer in enim sed nisl dignissim gravida. Sed sodales tincidunt magna, porta molestie ante pellentesque id. Curabitur mollis mauris a ante aliquam imperdiet. 
-                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed lobortis ex et velit cursus efficitur.</span><br />
-
-                            <span>Maecenas id scelerisque leo. In aliquet mauris et hendrerit tristique. Duis ullamcorper, neque in gravida vehicula, lorem sem facilisis magna, ac cursus augue 
-                            tellus sed odio. Donec viverra consequat nibh, vel egestas tortor condimentum vitae. Cras id dictum erat. Fusce aliquet tortor libero, vitae dictum metus porta vel. 
-                            Phasellus congue purus felis, quis mollis lectus volutpat eget. Proin non sollicitudin augue.</span><br />
-                            
-                            <span>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum id euismod ante, tincidunt hendrerit velit. Etiam mollis 
-                            quam ac diam tempus commodo. Cras vehicula suscipit magna, ac pulvinar ex cursus nec. Nunc egestas ligula ac massa auctor dapibus. Duis ornare semper scelerisque. 
-                            Maecenas ac facilisis ligula. Curabitur ut felis sed velit tincidunt gravida at in dui. Morbi id arcu vel libero porta consequat. In laoreet turpis nisl, at feugiat 
-                            libero iaculis sed. Sed suscipit pellentesque condimentum. Cras nec pellentesque lorem. Vestibulum nunc nunc, tempor id dolor tristique, molestie aliquet tellus.</span><br />
-                            
-                            <span>Maecenas ullamcorper tellus id lorem convallis ultricies. Donec diam augue, sagittis porta pretium a, pretium eu erat. Maecenas dapibus mauris sapien, sit amet 
-                            consectetur augue feugiat a. Sed sed ultrices sapien. Etiam tempor, felis non varius tempor, mi dolor egestas dolor, id efficitur neque diam sit amet sem.
-                            Aenean mattis vitae ipsum non tempor. Phasellus pretium sagittis malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer orci magna, 
-                            pulvinar ut dolor et, malesuada semper risus. In interdum malesuada suscipit. Nulla facilisi. Nunc luctus, neque sagittis venenatis congue, lacus quam feugiat lacus, 
-                            in ornare augue urna nec augue. Nunc dignissim viverra ex, et placerat leo pharetra eget.</span>
-
-                            <div class="row pt-5">
-                                <div class="col">
-                                    <h3><i class="fa-solid fa-graduation-cap"></i> EDUCATION</h3>
-                                    <b>HARVARD MEDICAL SCHOOL</b><br>
-                                    Harvard/MIT MD-PhD Program<br>
-                                    MD-PhD Student<br><br>
-
-                                    <b>LOYOLA UNIVERISITY CHICAGO</b><br>
-                                    Bachelor of Science, Biology<br>
-                                    GPA: 4.0 | MCAT (524)
-
-                                </div>
-                                <div class="col">
-                                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> PROFICIENCIES</h3>
-                                    <div class="row">
-                                        <div class="col">
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Prism<br>
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Excel<br>
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Cinema 4d<br>
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Parallels<br>
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Sony Vegas<br>
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Rain Drop Analyst II<br><br>
-                                        </div>
-                                        <div class="col">
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Hardware implementation<br>
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Spanish (intermediate)<br>
-                                            <i class="fa-solid fa-plus" style="color: #b49656;"></i> Arabic (proficient)<br>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col justify-content-center d-inline">
+              <div class="row justify-content-center">
+                <h1 style="font-family: 'SansBlack', sans-serif; margin-top: 10px;">JACK GHANNAM</h1>
+              </div>
             </div>
-
-
-
-
-            <div class="container-fluid" id="user-publications">
-                <main role="main">
-                    <div class="p-5 bg-light rounded-3 text-center">
-                      <div class="container-fluid" style="max-width: 75rem;">
-                        <h1 class="text-dark">List of Publications</h1>
-                        <p class="lead text-muted">Below are published articles and journals. Included with each publication—a view of the original source publication, list of publication citations used in other works, and a download for each publication in PDF format. </p>
-                        <div class="container" style="width: 50rem;">
-                            <div class="row">
-                                <div class="col-6" id="example">Loading...</div>
-                                <div class="col pt-4 mb-4 d-none d-lg-block">
-                                    Cited by
-                                    <div class="col text-left text-muted">
-                                        <hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #b69857, #f3d98f);margin-top: 30px;">
-                                        Index&emsp;&emsp;&emsp;&emsp;&emsp;All&emsp;&emsp;&emsp;&emsp;&nbsp;Since 2016
-                                        <hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #b69857, #f3d98f);margin-top: 30px;">
-                                        Citations&emsp;&emsp;&emsp;&nbsp;<a href="#" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">214</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<a href="#" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">210</a><br>
-                                        h-index&emsp;&emsp;&emsp;&emsp;&emsp;7&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;7<br>
-                                        i10-index&emsp;&emsp;&emsp;&emsp;6&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;6<br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="pt-2">
-                          <a href="https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en" target="_blank" class="btn btn-primary my-2 shadow-none">Google Scholar</a>
-                          <a href="https://orcid.org/0000-0003-0275-9099" target="_blank" class="btn btn-secondary my-2 shadow-none">ORCID</a>
-                        </p>
-                    </div>
-                  </div>
-                  
-                    <div class="album py-5">
-                      <div class="container-fluid"  style="max-width: 75rem;">
-                  
-                        <div class="row">
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                                <a href="#" onclick="JavaScript:newPopup('https://experts.umn.edu/en/publications/impact-of-conditioning-intensity-of-allogeneic-transplantation-fo')"><img src="img/article-1-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Impact of conditioning intensity of allogeneic transplantation for acute myeloid leukemia with genomic evidence of residual disease</h5>
-                                <p class="card-text">
-                                <small class="text-muted">CS Hourigan, LW Dillon, G Gui, BR Logan, M Fei, J Ghannam, Y Li, ...
-                                    Journal of Clinical Oncology 38 (12), 1273-1283</small>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://experts.umn.edu/en/publications/impact-of-conditioning-intensity-of-allogeneic-transplantation-fo')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=3583663336928223602')">Citations</button>
-                                    <a href="docs/publication-1.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2020</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">119 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1rU4A7Tt9Obc7GfgecugQGu578ckvUj83/view')"><img src="img/article-2-cover.GIF" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">A Series of 4-and 5-Coordinate Ni (II) Complexes: Synthesis, Characterization, Spectroscopic, and DFT Studies</h5>
-                                <p class="card-text">
-                                <small class="text-muted">J Ghannam, T Al Assil, TC Pankratz, RL Lord, M Zeller, WT Lee
-                                    Inorganic chemistry 57 (14), 8307-8316</small><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1rU4A7Tt9Obc7GfgecugQGu578ckvUj83/view')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=3583663336928223602')">Citations</button>
-                                    <a href="docs/publication-2.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                    
-                                  </div>
-                                  <small class="text-muted">2018</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">17 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1qVAHKxeLybYInNwS9LXAQrWChj1_hGtv/view')"><img src="img/article-3-cover.jpg" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Baseline TP53 mutations in adults with SCD developing myeloid malignancy following hematopoietic cell transplantation</h5>
-                                <p class="card-text">
-                                <small class="text-muted">JY Ghannam, X Xu, I Maric, L Dillon, Y Li, MM Hsieh, CS Hourigan, ...
-                                    Blood 135 (14), 1185-1188</small><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1qVAHKxeLybYInNwS9LXAQrWChj1_hGtv/view')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5038628723639452888')">Citations</button>
-                                    <a href="docs/publication-3.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2020</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">16 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://pubs.acs.org/doi/abs/10.1021/acs.inorgchem.9b00168')"><img src="img/article-4-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Intramolecular C–H Functionalization Followed by a [2σ + 2π] Addition via an Intermediate Nickel–Nitridyl Complex</h5>
-                                <p class="card-text">
-                                <small class="text-muted">J Ghannam, Z Sun, TR Cundari, M Zeller, A Lugosan, CM Stanek, WT Lee
-                                  Inorganic chemistry 58 (11), 7131-7135</small><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://pubs.acs.org/doi/abs/10.1021/acs.inorgchem.9b00168')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10141417909023262426')">Citations</button>
-                                    <a href="docs/publication-4.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2019</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">15 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://ashpublications.org/bloodadvances/article/4/2/367/440611/Highly-multiplexed-proteomic-assessment-of-human')"><img src="img/article-5-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Highly multiplexed proteomic assessment of human bone marrow in acute myeloid leukemia</h5>
-                                <p class="card-text">
-                                <small class="text-muted">H Çelik, KE Lindblad, B Popescu, G Gui, M Goswami, J Valdez, J Ghannam, ...
-                                  Blood advances 4 (2), 367-379</small><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://ashpublications.org/bloodadvances/article/4/2/367/440611/Highly-multiplexed-proteomic-assessment-of-human')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=2846527200817788649')">Citations</button>
-                                    <a href="docs/publication-5.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2020</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">14 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://onlinelibrary.wiley.com/doi/full/10.1111/bjh.16362')"><img src="img/article-6-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Next‐generation sequencing for measurable residual disease detection in acute myeloid leukaemia</h5>
-                                <p class="card-text">
-                                <small class="text-muted">J Ghannam, LW Dillon, CS Hourigan
-                                  British journal of haematology 188 (1), 77-85</small><br><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://onlinelibrary.wiley.com/doi/full/10.1111/bjh.16362')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=329785118411100507')">Citations</button>
-                                    <a href="docs/publication-6.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2020</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">12 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://europepmc.org/article/nbk/nbk539882')"><img src="img/article-7-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Neuroanatomy, cranial meninges</h5>
-                                <p class="card-text">
-                                <small class="text-muted">JY Ghannam, KA Al Kharazi<br>
-                                  StatPearls [Pubmed]</small><br><br><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://europepmc.org/article/nbk/nbk539882')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9839214866747138935')">Citations</button>
-                                    <a href="docs/publication-7.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2019</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">8 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7849750/')"><img src="img/article-8-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Detectable mutations precede late myeloid neoplasia in aplastic anemia</h5>
-                                <p class="card-text">
-                                <small class="text-muted">BA Patel*, J Ghannam*, EM Groarke*, M Goswami, L Dillon, ...
-                                  haematologica 106 (2), 647</small><br><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7849750/')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=6945422089016279201')">Citations</button>
-                                    <a href="docs/publication-8.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2021</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">3 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://ascopubs.org/doi/full/10.1200/PO.20.00355')"><img src="img/article-9-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Impact of Conditioning Intensity and Genomics on Relapse After Allogeneic Transplantation for Patients With Myelodysplastic Syndrome</h5>
-                                <p class="card-text">
-                                <small class="text-muted">LW Dillon, G Gui, BR Logan, M Fei, J Ghannam, Y Li, ...
-                                  JCO Precision Oncology 5, 265-274</small>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://ascopubs.org/doi/full/10.1200/PO.20.00355')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17941074725673913948')">Citations</button>
-                                    <a href="docs/publication-9.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2021</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">3 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')"><img src="img/article-10-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Personalized Single-Cell Proteogenomics to Distinguish Acute Myeloid Leukemia from Non-Malignant Clonal Hematopoiesis</h5>
-                                <p class="card-text">
-                                <small class="text-muted">A Lugosan, T Cundari, K Fleming, DA Dickie, M Zeller, J Ghannam, ...
-                                  Dalton Transactions 49 (4), 1200-1206</small>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=13348053188823887312')">Citations</button>
-                                    <a href="docs/publication-10.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2020</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">3 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://pubs.rsc.org/en/content/articlelanding/2020/DT/C9DT04544A')"><img src="img/article-11-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Biochemistry, DNA Structure</h5>
-                                <p class="card-text">
-                                <small class="text-muted">JY Ghannam, J Wang, A Jan<br>
-                                  StatPearls [Internet]</small><br><br><br><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://pubs.rsc.org/en/content/articlelanding/2020/DT/C9DT04544A')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=8563486504798554524')">Citations</button>
-                                    <a href="docs/publication-11.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2020</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">2 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/books/NBK538241/')"><img src="img/article-12-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Neuroanatomy, cranial meninges</h5>
-                                <p class="card-text">
-                                <small class="text-muted">JY Ghannam, KA Al Kharazi<br>
-                                  StatPearls [Pubmed]</small><br><br><br><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/books/NBK538241/')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11663234727551282316')">Citations</button>
-                                    <a href="docs/publication-12.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2020</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">1 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')"><img src="img/article-13-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">A Novel Proteomic Profiling of the Bone Marrow Microenvironment Reveals Elevated Levels of the Chemokine CCL23 Isoforms in Acute Myeloid Leukemia</h5>
-                                <p class="card-text">
-                                <small class="text-muted">H Celik, KE Lindblad, B Popescu, G Fantoni, G Gui, J Valdez, M Goswami, J Ghannam, ...
-                                  Blood, The Journal of the American Society of Hematology 134, 2709-2709</small>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17073920772923522025')">Citations</button>
-                                    <a href="docs/publication-13.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2019</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">1 citations</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://www.medrxiv.org/content/10.1101/2021.06.23.21258377v1')"><img src="img/article-14-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Pembrolizumab and Decitabine for Refractory or Relapsed Acute Myeloid Leukemia</h5>
-                                <p class="card-text">
-                                <small class="text-muted">M Goswami, G Gui, LW Dillon, KE Lindblad, J Thompson, J Valdez, J Ghannam, ...
-                                  medRxiv</small><br><br><br><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.medrxiv.org/content/10.1101/2021.06.23.21258377v1')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">Citations</button>
-                                    <a href="docs/publication-14.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2021</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">Newly Published</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="card mb-4 shadow-sm">
-                              <a href="#" onclick="JavaScript:newPopup('https://bloodcancerdiscov.aacrjournals.org/content/2/4/319')"><img src="img/article-15-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
-                              <div class="card-body">
-                                <h5 class="card-title">Personalized Single-Cell Proteogenomics to Distinguish Acute Myeloid Leukemia from Nonmalignant Clonal Hematopoiesis</h5>
-                                <p class="card-text">
-                                <small class="text-muted">LW Dillon*, J Ghannam*, C Nosiri*, G Gui, M Goswami, KR Calvo, ...
-                                  Blood Cancer Discovery 2, 1-7</small><br><br><br>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://bloodcancerdiscov.aacrjournals.org/content/2/4/319')">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">Citations</button>
-                                    <a href="docs/publication-15.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
-                                  </div>
-                                  <small class="text-muted">2021</small>
-                                </div>
-                              </div>
-                                <div class="w3-light-grey">
-                                    <div class="w3-container w3-blue w3-center" style="width:100%;">Newly Published</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          
-                        </div>
-                      </div>
-                    </div>
-                  
-                  </main>
+            <div class="col">
+              <hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #f3d98f, #b69857);margin-top: 30px;">
             </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <img src="img/profile.jpg" id="body-logo" alt="Image Logo in Body" />
 
+          <span class="span-text">
+            Born in Detroit, Michigan, Jack graduated summa cum laude from Loyola University Chicago and is currently attending Harvard Medical School, where he is an aspiring dual-degree MD-PhD
+            student training in the field of tumor immunology under the guidance of Dr. Bryan Choi, Dr. Bob Carter and Dr. Marcela Maus, among others, as part of their new Cell Therapy Consortium.
+            He is the first PhD student to work with this prestigious team, with the aim of bringing immunotherapy to the Neuro-oncologic space. The goal is to develop novel immunotherapeutic modalities
+            for the use in neuro-oncology, such as CAR-T therapy, in combination with other modalities such as oncolytic viruses and immune checkpoint blockade.
+          </span><br>
+          <span class=>
+            Jack worked for three years in an inorganic/physical chemistry lab, where he performed at the level of a graduate student and developed and characterized 12 novel complexes.
+            His work led to two first author publications, which is a remarkable accomplishment at such an early stage in his career—all this while maintaining a 4.00 GPA. He also received several
+            awards for his academic achievements, including the Fr. Morrissey Medal for the most outstanding chemistry student.
+          </span><br>
+          <span>
+            Jack then spent two years at the NIH with Dr. Chris Hourigan as part of the NIH Post Baccalaureate IRTA program, where he worked on translational immunology projects. In Dr. Hourigan’s lab,
+            he used next-generation sequencing tools for the detection and prevention of Acute Myeloid Leukemia. He published three first author papers including an article in the journal Blood.
+          </span><br>
+          <span><i>
+              "I have been fortunate enough to enter my training at the conception of the program, with the ultimate desire to remain a faculty member after I progress through my scientific and medical training.
+              I am excited by the prospect of joining a team of such high-level physicians and researchers and the opportunity to become a world-leading neurosurgeon-scientist. Ultimately, as one of the founders
+              of this new field of Neurosurgical Immuno-oncology, I will seek to use my interest in the pedagogical side of professorship to serve as a mentor and trainer to usher in the next generation of
+              scientists.“<br></i>
+            <small>- Jack G.</small>
+          </span>
 
+          <div class="row pt-5">
+            <div class="col">
+              <h3><i class="fa-solid fa-graduation-cap"></i> EDUCATION</h3>
+              <b>HARVARD MEDICAL SCHOOL</b><br>
+              Harvard/MIT MD-PhD Program<br>
+              MD-PhD Student<br><br>
 
+              <b>LOYOLA UNIVERISITY CHICAGO</b><br>
+              Bachelor of Science, Biology<br>
+              GPA: 4.0 | MCAT (524)
 
-            <div class="container-fluid" id="user-research">
-              <div class="container-fluid">
-                <div class="container-fluid p-5 bg-light rounded-3 text-center">
-                    <div class="container-fluid" style="max-width: 75rem;">
-                      <h1 class="text-dark">Research</h1>
-                          <p class="lead text-muted">Included is a comprehensive list of research—locations, time spent, content, etc. Also included are links to published research. For more information, please contact Jack Ghannam!</p>
-                          <p>
-                            <a href="https://www.researchgate.net/scientific-contributions/Jack-Ghannam-2166556950" target="_blank" class="btn btn-primary my-2">ResearchGate - NIH</a>
-                            <a href="https://www.researchgate.net/scientific-contributions/Jack-Ghannam-2144584008" target="_blank" class="btn btn-secondary my-2">ResearchGate - Loyola</a>
-                          </p>
-                    </div>
+            </div>
+            <div class="col">
+              <h3><i class="fa-solid fa-screwdriver-wrench"></i> PROFICIENCIES</h3>
+              <div class="row">
+                <div class="col">
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Prism<br>
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Excel<br>
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Cinema 4d<br>
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Parallels<br>
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Sony Vegas<br>
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Rain Drop Analyst II<br><br>
                 </div>
-            <div class="container-fluid pb-4" style="max-width: 75rem;">
-
-              <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        <h5 class="text-dark">Dr. Linda Bi Lab and Dr. Ramen Beroukhim Labs | May 2021 - Present</h5><br />
-                      </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                        <div class="accordion-body">
-                            <small><i>BWH, DFCI and the Broad Institute, MD-PhD Rotation Student | Boston, MA</i></small><br><br>
-                            
-                            <p>Apply genomic and cancer biology approaches to define the molecular taxonomy and tumor microenvironment of skull base tumors. Further developing my understanding of tumor cell evolution and their acquisition of resistance to innate immune mechanisms as well as administered treatments. Define molecular markers with diagnostic and prognostic potential to track brain tumors across time and to develop improved therapeutic options.</p>
-                            <ul>
-                              <li>My current rotation project with Dr. Lind Bi and Dr. Rameen Beroukhim entails studying the genomic drivers and microenvironment of meningioma and other CNS tumors (e.g., glioma). My primary project has been the implementation and application of a novel algorithm to a cohort of over 1000 meningioma microarray samples to identify new drivers of tumorigenesis, in addition to evaluating the selective pressure driving aneuploidy in meningioma</li>
-                              <li>Secondary projects include interrogating the role of a TERT promotor mutation in the recurrence of meningioma, and in particular recurrence of meningioma into higher grade tumors. This entails wet-lab work, and ultimately the sequencing and analysis of 200-500 meningioma samples</li>
-                              <li>Tertiary projects include collaborations with the David A. Barbie to leverage their organoid system to assess meningioma immune microenvironment, and in particular the role of innate immune system cells in tumorigenesis in addition to the impact that STING agonists could play in potential treatment</li>
-                              <li>Assist master’s student in the wet-lab component of thesis project</li>
-                              <li> Learned the fundamentals of how to use the R programming language for purposes of biomedical research</li>
-                          </ul>
-                      </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                      <h5 class="text-dark">Dr. Priscila Brastiano’s Lab, Brain Tumor Research Center (150 hours) | July 2020 - August 2020</h5><br />
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body">
-                      <small><i>Mass General Hospital, MD-PhD Rotation Student | Boston, MA</i></small><br><br>
-                      
-                      <p>Perform translation genomics to identify drivers of progression in human brain tumors, predominantly brain tumor metastases, functionally characterize the candidate drivers in vitro and in vivo, and apply novel therapeutics (i.e., targeted therapy and immunotherapy) preclinically to be translated into clinical trial under the mentorship of Dr. Priscilla Brastianos of MGH’s Brain Tumor Research Center. Work includes, but not limited to, bulk NGS and single-cell sequencing, use of mouse models of brain tumors/metastasis, and sequencing and digital PCR for ctDNA detection in liquid biopsies.</p>
-                      <ul>
-                        <li>Acquired skills in working with mice models to assess efficacy of novel therapies in a BSL-2 setting. This included engrafting subcutaneous, intrathoracic, and intracranial tumors into both immunocompetent and incompetent mice, and administering experimental therapies via intraperitoneal therapies and oral gavage</li>
-                        <li>Headed lab effort to apply previously acquired skills in the use of digital droplet PCR (ddPCR) for sensitive detection of rare events to determine if circulating tumor DNA (ctDNA) could be detected via ddPCR in mice models. Optimized workflow for cell-free DNA (cfDNA) extraction from low-volume mice plasma and developed and optimized ddPCR assays for the sensitive detection of mutations of interest</li>
-                        <li>Headed lab effort to establish a tissue clearing protocol for the enhanced visualization of brain-slice optical imaging in mouse model cohorts. This entailed a thorough literature review to determine how the strengths and drawbacks of different protocols related to our specific hypotheses</li>
-                        <li>Learned workflows and protocols for tissue acquisition and processing from operating rooms, clinic, and collaborators, in addition to the sample management system</li>
-                        <li>Attended clinical meetings such as Brain Metastasis Tumor Board, which included a multidisciplinary dialogue to determine best treatment options for patient cases at MGH with brain metastases</li>
-                    </ul>
-                  </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                      <h5 class="text-dark">NIH Post Baccalaureate IRTA Program (3100 hours) | July 2018 - June 2020</h5><br />
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                    <div class="accordion-body">
-                      <small><i>Postbac Fellow | Bethesda, MD</i></small><br><br>
-                      
-                      <p>Performed translational human immunology research under the guidance of Dr. Christopher Hourigan, discovering ways to detect, prevent and treat Acute Myeloid Leukemia (AML) and AML relapse. This included developing novel sequencing tools for the sensitive detection of residual disease in order to predict patients who may be at risk of relapse and whom may benefit from additional therapy.</p>
-                      <ul>
-                        <li>Awarded Mission Bio grant challenge to develop and apply a novel, microfluidics-based,
-                          single-cell DNA sequencing technology in the context of relapsed/refractory AML. Developing and
-                          applying this technology was my primary project during my time at the NIH
-                          </li>
-                        <li>Lead projects regarding application of single-cell DNA sequencing applications in AML, Sickle Cell Disease (SCD), and Aplastic Anemia (AA). Also lead projects exploring the etiology of AML development in SCD patients receiving gene therapy, and AA patients receiving BM transplant (see publications)</li>
-                        <li>Awarded NIH's Orloff Science Award for "Work Demonstrating That Intervention for Acute Myeloid
-                          Leukemia Patients in Remission but With Genomic Evidence of Residual Disease Can Improve Survival"
-                          </li>
-                        <li>Collaborated with biomedical companies directly (Qiagen, Eppendorf, 10x, Mission Bio, Invitrogen)
-                          to help develop and apply their products to our research (e.g., sequencing panels)
-                          </li>
-                        <li>Developed wet lab protocols for Next Generation Sequence (NGS)-based residual disease detection. Streamlined workflow for bulk sequencing, including DNA isolation from patient whole blood to preparing patient’s DNA for NGS library preparation; lab skills include human sample processing from bone marrow and blood, operating automated liquid handlers, preparing bulk and single cell sequencing libraries, analyzing sequencing data, performing qPCR, ddPCR, and cell culturing</li>
-                        <li>Observed surgeries and procedures while obtaining samples (e.g., neurosurgery and bone marrow
-                          transplant)
-                          </li>
-                          <li>Attend classes in bioinformatics to analyze NGS and other data at the NIH’s graduate school (FAES)
-                            as well as presentations and conferences relevant to immunology and leukemia
-                            </li>
-                    </ul>
-                  </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                      <h5 class="text-dark">Dr. Wei-Tsung Lee’s Inorganic Chemistry Laboratory (3000-5000 hours) | August 2015 - June 2018</h5><br />
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-                    <div class="accordion-body">
-                      <small><i>Laboratory Assistant | Chicago, IL</i></small><br><br>
-                      
-                      <p>Applied synthetic and physical inorganic chemistry to address current challenges in areas such as coordination chemistry, medicinal inorganic chemistry, bioinorganic chemistry, and renewable energy. Completed advanced training in synthesis via designing and preparing molecular complexes, and in physical methods of spectroscopy (IR, NMR, UV, Evans Method), crystallography, and voltammetry.</p>
-                      <ul>
-                        <li>Developed and fully characterized 12 novel inorganic nickel and vanadium complexes and developed a nickel system that helped uncover the mechanism of C-H bond activation in the nickel-nitridyl milieu
-                          </li>
-                          <li>Adept with operation and maintenance of nitrogen atmosphere glove box, wet glove box for anaerobic operation, solvent purification system, photoreactor, and gas addition apparatus</li>
-                          <li>Taught incoming undergraduate and graduate students proper laboratory safety and fundamental techniques of organic and inorganic synthesis</li>
-                          <li>Presented poster at Loyola Chemistry Department poster session, and at Loyola’s weekend of excellence</li>
-                          <li>Published two 1st author publications in addition to a third paper as a co-author</li>
-                          <li>Invited to submit cover art for Inorganic Chemistry Journal Volume 58, Issue 11</li>
-                    </ul>
-                  </div>
-                  </div>
+                <div class="col">
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Hardware implementation<br>
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Spanish (intermediate)<br>
+                  <i class="fa-solid fa-plus" style="color: #b49656;"></i> Arabic (proficient)<br>
                 </div>
               </div>
-                  </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content for Publications -->
+  <div class="container-fluid" id="user-publications">
+    <main role="main">
+      <div class="p-5 bg-light rounded-3 text-center">
+        <div class="container-fluid" style="max-width: 75rem;">
+          <h1 class="text-dark">List of Publications</h1>
+          <p class="lead text-muted">Below are published articles and journals. Included with each publication—a view of the original source publication, list of publication citations used in other works, and a download for each publication in PDF format. </p>
+          <div class="container" style="width: 50rem;">
+            <div class="row">
+              <div class="col-6" id="example">Loading...</div>
+              <div class="col pt-4 mb-4 d-none d-lg-block">
+                Cited by
+                <div class="col text-left text-muted">
+                  <hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #b69857, #f3d98f);margin-top: 30px;">
+                  Index&emsp;&emsp;&emsp;&emsp;&emsp;All&emsp;&emsp;&emsp;&emsp;&nbsp;Since 2016
+                  <hr style="height:4px;border-width:0;color:gray;background-image: linear-gradient(90deg, #b69857, #f3d98f);margin-top: 30px;">
+                  Citations&emsp;&emsp;&emsp;&nbsp;<a href="#" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">214</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<a href="#" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">210</a><br>
+                  h-index&emsp;&emsp;&emsp;&emsp;&emsp;7&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;7<br>
+                  i10-index&emsp;&emsp;&emsp;&emsp;6&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;6<br>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="pt-2">
+            <a href="https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en" target="_blank" class="btn btn-primary my-2 shadow-none">Google Scholar</a>
+            <a href="https://orcid.org/0000-0003-0275-9099" target="_blank" class="btn btn-secondary my-2 shadow-none">ORCID</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="album py-5">
+        <div class="container-fluid" style="max-width: 75rem;">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://experts.umn.edu/en/publications/impact-of-conditioning-intensity-of-allogeneic-transplantation-fo')"><img src="img/article-1-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Impact of conditioning intensity of allogeneic transplantation for acute myeloid leukemia with genomic evidence of residual disease</h5>
+                  <p class="card-text">
+                    <small class="text-muted">CS Hourigan, LW Dillon, G Gui, BR Logan, M Fei, J Ghannam, Y Li, ...
+                      Journal of Clinical Oncology 38 (12), 1273-1283</small>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://experts.umn.edu/en/publications/impact-of-conditioning-intensity-of-allogeneic-transplantation-fo')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=3583663336928223602')">Citations</button>
+                      <a href="docs/publication-1.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2020</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">119 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card mb-4 shadow-sm">
+                      <a href="#" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1rU4A7Tt9Obc7GfgecugQGu578ckvUj83/view')"><img src="img/article-2-cover.GIF" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                      <div class="card-body">
+                        <h5 class="card-title">A Series of 4-and 5-Coordinate Ni (II) Complexes: Synthesis, Characterization, Spectroscopic, and DFT Studies</h5>
+                        <p class="card-text">
+                          <small class="text-muted">J Ghannam, T Al Assil, TC Pankratz, RL Lord, M Zeller, WT Lee
+                            Inorganic chemistry 57 (14), 8307-8316</small><br><br>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1rU4A7Tt9Obc7GfgecugQGu578ckvUj83/view')">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=3583663336928223602')">Citations</button>
+                            <a href="docs/publication-2.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+      
+                          </div>
+                          <small class="text-muted">2018</small>
+                        </div>
+                      </div>
+                      <div class="w3-light-grey">
+                        <div class="w3-container w3-blue w3-center" style="width:100%;">17 citations</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card-back px-2 pe-3">
+                    <h2 class="text-center pb-2">Additional Information</h2>
+                    <ul>
+                      <li class="mb-1">Invented and characterized 12 Novel Inorganic Compounds as undergrad which was published in top Inorganic Chemistry Journal(the “Blood” of Inorganic Chemistry)—according to Chemistry Department Head “and unheard-of feat”</li>
+                    </ul>
+                  </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card mb-4 shadow-sm">
+                      <a href="#" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1qVAHKxeLybYInNwS9LXAQrWChj1_hGtv/view')"><img src="img/article-3-cover.jpg" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                      <div class="card-body">
+                        <h5 class="card-title">Baseline TP53 mutations in adults with SCD developing myeloid malignancy following hematopoietic cell transplantation</h5>
+                        <p class="card-text">
+                          <small class="text-muted">JY Ghannam, X Xu, I Maric, L Dillon, Y Li, MM Hsieh, CS Hourigan, ...
+                            Blood 135 (14), 1185-1188</small><br><br>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://drive.google.com/file/d/1qVAHKxeLybYInNwS9LXAQrWChj1_hGtv/view')">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=5038628723639452888')">Citations</button>
+                            <a href="docs/publication-3.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                          </div>
+                          <small class="text-muted">2020</small>
+                        </div>
+                      </div>
+                      <div class="w3-light-grey">
+                        <div class="w3-container w3-blue w3-center" style="width:100%;">16 citations</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card-back px-2 pe-3">
+                    <h2 class="text-center pb-2">Additional Information</h2>
+                    <ul>
+                      <li class="mb-1"><a href="https://ashpublications.org/blood/article/135/14/1083/454163/The-double-edged-sword-of-AlloHCT-for-SCD" target="_BLANK">Associated Editorial</a>: The double-edged sword of AlloHCT for SCD. Blood 135(14). pp.1083-1085.oPublished with an associated editorial</li>
+                      <li class="mb-1">Study made it into clinical standard of care guidelines for sickle cell disease stem cell transplantation: <a href="https://ashpublications.org/bloodadvances/article/5/18/3668/476988/American-Society-of-Hematology-2021-guidelines-for" target="_BLANK">Publication</a> </li>
+                      <li class="mb-1">Overall paper notable for studying patients who developed AML from well-known bluebird bio trial. Seenews article feaeturing our work: <a href="https://endpts.com/after-cancer-scare-fda-lets-bluebird-resume-trials-for-sickle-cell-gene-therapy-but-big-questions-linger-over-field/" target="_BLANK">Publication</a></li>
+                    </ul>
+                  </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card mb-4 shadow-sm">
+                      <a href="#" onclick="JavaScript:newPopup('https://pubs.acs.org/doi/abs/10.1021/acs.inorgchem.9b00168')"><img src="img/article-4-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                      <div class="card-body">
+                        <h5 class="card-title">Intramolecular C–H Functionalization Followed by a [2σ + 2π] Addition via an Intermediate Nickel–Nitridyl Complex</h5>
+                        <p class="card-text">
+                          <small class="text-muted">J Ghannam, Z Sun, TR Cundari, M Zeller, A Lugosan, CM Stanek, WT Lee
+                            Inorganic chemistry 58 (11), 7131-7135</small><br><br>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://pubs.acs.org/doi/abs/10.1021/acs.inorgchem.9b00168')">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=10141417909023262426')">Citations</button>
+                            <a href="docs/publication-4.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                          </div>
+                          <small class="text-muted">2019</small>
+                        </div>
+                      </div>
+                      <div class="w3-light-grey">
+                        <div class="w3-container w3-blue w3-center" style="width:100%;">15 citations</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card-back px-2 pe-3">
+                    <h2 class="text-center pb-2">Additional Information</h2>
+                    <ul>
+                      <li class="mb-1">Follow-up to below paper characterizing mechanism of elusive C-H activation mechanism that the inorganic compounds I developed (again below) could perform. Again, in the top Inorganic Chemistry Journal, and invited by Journal to submit cover-art for issue</li>
+                    </ul>
+                  </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://ashpublications.org/bloodadvances/article/4/2/367/440611/Highly-multiplexed-proteomic-assessment-of-human')"><img src="img/article-5-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Highly multiplexed proteomic assessment of human bone marrow in acute myeloid leukemia</h5>
+                  <p class="card-text">
+                    <small class="text-muted">H Çelik, KE Lindblad, B Popescu, G Gui, M Goswami, J Valdez, J Ghannam, ...
+                      Blood advances 4 (2), 367-379</small><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://ashpublications.org/bloodadvances/article/4/2/367/440611/Highly-multiplexed-proteomic-assessment-of-human')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=2846527200817788649')">Citations</button>
+                      <a href="docs/publication-5.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2020</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">14 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://onlinelibrary.wiley.com/doi/full/10.1111/bjh.16362')"><img src="img/article-6-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Next‐generation sequencing for measurable residual disease detection in acute myeloid leukaemia</h5>
+                  <p class="card-text">
+                    <small class="text-muted">J Ghannam, LW Dillon, CS Hourigan
+                      British journal of haematology 188 (1), 77-85</small><br><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://onlinelibrary.wiley.com/doi/full/10.1111/bjh.16362')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=329785118411100507')">Citations</button>
+                      <a href="docs/publication-6.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2020</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">12 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://europepmc.org/article/nbk/nbk539882')"><img src="img/article-7-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Neuroanatomy, cranial meninges</h5>
+                  <p class="card-text">
+                    <small class="text-muted">JY Ghannam, KA Al Kharazi<br>
+                      StatPearls [Pubmed]</small><br><br><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://europepmc.org/article/nbk/nbk539882')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=9839214866747138935')">Citations</button>
+                      <a href="docs/publication-7.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2019</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">8 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7849750/')"><img src="img/article-8-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Detectable mutations precede late myeloid neoplasia in aplastic anemia</h5>
+                  <p class="card-text">
+                    <small class="text-muted">BA Patel*, J Ghannam*, EM Groarke*, M Goswami, L Dillon, ...
+                      haematologica 106 (2), 647</small><br><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7849750/')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=6945422089016279201')">Citations</button>
+                      <a href="docs/publication-8.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2021</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">3 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card mb-4 shadow-sm">
+                      <a href="#" onclick="JavaScript:newPopup('https://ascopubs.org/doi/full/10.1200/PO.20.00355')"><img src="img/article-9-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                      <div class="card-body">
+                        <h5 class="card-title">Impact of Conditioning Intensity and Genomics on Relapse After Allogeneic Transplantation for Patients With Myelodysplastic Syndrome</h5>
+                        <p class="card-text">
+                          <small class="text-muted">LW Dillon, G Gui, BR Logan, M Fei, J Ghannam, Y Li, ...
+                            JCO Precision Oncology 5, 265-274</small>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://ascopubs.org/doi/full/10.1200/PO.20.00355')">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17941074725673913948')">Citations</button>
+                            <a href="docs/publication-9.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                          </div>
+                          <small class="text-muted">2021</small>
+                        </div>
+                      </div>
+                      <div class="w3-light-grey">
+                        <div class="w3-container w3-blue w3-center" style="width:100%;">3 citations</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card-back px-2 pe-3">
+                    <h2 class="text-center pb-2">Additional Information</h2>
+                    <ul>
+                      <li class="mb-1">Published as Rapid Communication “Practice Changing”</li>
+                      <li class="mb-1">Web of Science“Highly Cited Paper”</li>
+                      <li class="mb-1">Most cited 2020 paper in topic “AML” per Web of Science (WOS)</li>
+                      <li class="mb-1">Second most cited 2020 paper in topic “hematopoietic cell transplantation</li>
+                      <li class="mb-1">Recognized as one of the <a href="https://irp.nih.gov/accomplishments/accomplishments-by-date" target="_BLANK">top accomplishments of the NIH in 2020</a></li>
+                    </ul>
+                  </div>
+                  </div>
+                </div>
             </div>
             
-        <!-- Content for Footer Bar -->
-        <div class="bg-dark text-lg-start text-muted p-3">
-            Created by <span class="text-white">Jack Ghannam</span>
+            <div class="col-md-4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card mb-4 shadow-sm">
+                      <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')"><img src="img/article-10-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                      <div class="card-body">
+                        <h5 class="card-title">Personalized Single-Cell Proteogenomics to Distinguish Acute Myeloid Leukemia from Non-Malignant Clonal Hematopoiesis</h5>
+                        <p class="card-text">
+                          <small class="text-muted">A Lugosan, T Cundari, K Fleming, DA Dickie, M Zeller, J Ghannam, ...
+                            Dalton Transactions 49 (4), 1200-1206</small>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=13348053188823887312')">Citations</button>
+                            <a href="docs/publication-10.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                          </div>
+                          <small class="text-muted">2020</small>
+                        </div>
+                      </div>
+                      <div class="w3-light-grey">
+                        <div class="w3-container w3-blue w3-center" style="width:100%;">3 citations</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flip-card-back px-2 pe-3">
+                    <h2 class="text-center pb-2">Additional Information</h2>
+                    <ul>
+                      <li class="mb-1">Pinnacle of the collaboration I helped lead with biotech start up Mission Bio</li>
+                    </ul>
+                  </div>
+                  </div>
+                </div>
+            </div>
+
+            
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://pubs.rsc.org/en/content/articlelanding/2020/DT/C9DT04544A')"><img src="img/article-11-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Biochemistry, DNA Structure</h5>
+                  <p class="card-text">
+                    <small class="text-muted">JY Ghannam, J Wang, A Jan<br>
+                      StatPearls [Internet]</small><br><br><br><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://pubs.rsc.org/en/content/articlelanding/2020/DT/C9DT04544A')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=8563486504798554524')">Citations</button>
+                      <a href="docs/publication-11.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2020</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">2 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/books/NBK538241/')"><img src="img/article-12-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Neuroanatomy, cranial meninges</h5>
+                  <p class="card-text">
+                    <small class="text-muted">JY Ghannam, KA Al Kharazi<br>
+                      StatPearls [Pubmed]</small><br><br><br><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/books/NBK538241/')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=11663234727551282316')">Citations</button>
+                      <a href="docs/publication-12.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2020</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">1 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')"><img src="img/article-13-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">A Novel Proteomic Profiling of the Bone Marrow Microenvironment Reveals Elevated Levels of the Chemokine CCL23 Isoforms in Acute Myeloid Leukemia</h5>
+                  <p class="card-text">
+                    <small class="text-muted">H Celik, KE Lindblad, B Popescu, G Fantoni, G Gui, J Valdez, M Goswami, J Ghannam, ...
+                      Blood, The Journal of the American Society of Hematology 134, 2709-2709</small>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8265308/')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/scholar?oi=bibs&hl=en&cites=17073920772923522025')">Citations</button>
+                      <a href="docs/publication-13.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2019</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">1 citations</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://www.medrxiv.org/content/10.1101/2021.06.23.21258377v1')"><img src="img/article-14-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Pembrolizumab and Decitabine for Refractory or Relapsed Acute Myeloid Leukemia</h5>
+                  <p class="card-text">
+                    <small class="text-muted">M Goswami, G Gui, LW Dillon, KE Lindblad, J Thompson, J Valdez, J Ghannam, ...
+                      medRxiv</small><br><br><br><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://www.medrxiv.org/content/10.1101/2021.06.23.21258377v1')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">Citations</button>
+                      <a href="docs/publication-14.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2021</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">Newly Published</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <a href="#" onclick="JavaScript:newPopup('https://bloodcancerdiscov.aacrjournals.org/content/2/4/319')"><img src="img/article-15-cover.JPG" height="200px" class="card-img-top shadow-sm bg-white rounded border-bottom" alt="..."></a>
+                <div class="card-body">
+                  <h5 class="card-title">Personalized Single-Cell Proteogenomics to Distinguish Acute Myeloid Leukemia from Nonmalignant Clonal Hematopoiesis</h5>
+                  <p class="card-text">
+                    <small class="text-muted">LW Dillon*, J Ghannam*, C Nosiri*, G Gui, M Goswami, KR Calvo, ...
+                      Blood Cancer Discovery 2, 1-7</small><br><br><br>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://bloodcancerdiscov.aacrjournals.org/content/2/4/319')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary shadow-none" onclick="JavaScript:newPopup('https://scholar.google.com/citations?user=5P1U3h0AAAAJ&hl=en')">Citations</button>
+                      <a href="docs/publication-15.pdf" target="_blank"><button type="button" class="btn btn-sm btn-outline-primary shadow-none" style="margin-left: -1px;">Download</button></a>
+                    </div>
+                    <small class="text-muted">2021</small>
+                  </div>
+                </div>
+                <div class="w3-light-grey">
+                  <div class="w3-container w3-blue w3-center" style="width:100%;">Newly Published</div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
         </div>
-    </body>
+      </div>
+
+    </main>
+  </div>
+
+
+  <!-- Begin section for User Research -->
+  <div class="container-fluid" id="user-research">
+    <div class="container-fluid">
+      <div class="container-fluid p-5 bg-light rounded-3 text-center">
+        <div class="container-fluid" style="max-width: 75rem;">
+          <h1 class="text-dark">Research</h1>
+          <p class="lead text-muted">Included is a comprehensive list of research—locations, time spent, content, etc. Also included are links to published research. For more information, please contact Jack Ghannam!</p>
+          <p>
+            <a href="https://www.researchgate.net/scientific-contributions/Jack-Ghannam-2166556950" target="_blank" class="btn btn-primary my-2">ResearchGate - NIH</a>
+            <a href="https://www.researchgate.net/scientific-contributions/Jack-Ghannam-2144584008" target="_blank" class="btn btn-secondary my-2">ResearchGate - Loyola</a>
+          </p>
+        </div>
+      </div>
+      <div class="container-fluid pb-4" style="max-width: 75rem;">
+
+        <div class="accordion py-4" id="accordionPanelsStayOpenExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOner">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOner" aria-expanded="true" aria-controls="panelsStayOpen-collapseOner">
+                <h5 class="text-dark">Dr. Linda Bi Lab and Dr. Ramen Beroukhim Labs | May 2021 - Present</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOner" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOner">
+              <div class="accordion-body">
+                <small><i>BWH, DFCI and the Broad Institute, MD-PhD Rotation Student | Boston, MA</i></small><br><br>
+
+                <p>Apply genomic and cancer biology approaches to define the molecular taxonomy and tumor microenvironment of skull base tumors. Further developing my understanding of tumor cell evolution and their acquisition of resistance to innate immune mechanisms as well as administered treatments. Define molecular markers with diagnostic and prognostic potential to track brain tumors across time and to develop improved therapeutic options.</p>
+                <ul>
+                  <li>My current rotation project with Dr. Lind Bi and Dr. Rameen Beroukhim entails studying the genomic drivers and microenvironment of meningioma and other CNS tumors (e.g., glioma). My primary project has been the implementation and application of a novel algorithm to a cohort of over 1000 meningioma microarray samples to identify new drivers of tumorigenesis, in addition to evaluating the selective pressure driving aneuploidy in meningioma</li>
+                  <li>Secondary projects include interrogating the role of a TERT promotor mutation in the recurrence of meningioma, and in particular recurrence of meningioma into higher grade tumors. This entails wet-lab work, and ultimately the sequencing and analysis of 200-500 meningioma samples</li>
+                  <li>Tertiary projects include collaborations with the David A. Barbie to leverage their organoid system to assess meningioma immune microenvironment, and in particular the role of innate immune system cells in tumorigenesis in addition to the impact that STING agonists could play in potential treatment</li>
+                  <li>Assist master’s student in the wet-lab component of thesis project</li>
+                  <li> Learned the fundamentals of how to use the R programming language for purposes of biomedical research</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwor">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwor" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwor">
+                <h5 class="text-dark">Dr. Priscila Brastiano’s Lab, Brain Tumor Research Center (150 hours) | July 2020 - August 2020</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwor" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwor">
+              <div class="accordion-body">
+                <small><i>Mass General Hospital, MD-PhD Rotation Student | Boston, MA</i></small><br><br>
+
+                <p>Perform translation genomics to identify drivers of progression in human brain tumors, predominantly brain tumor metastases, functionally characterize the candidate drivers in vitro and in vivo, and apply novel therapeutics (i.e., targeted therapy and immunotherapy) preclinically to be translated into clinical trial under the mentorship of Dr. Priscilla Brastianos of MGH’s Brain Tumor Research Center. Work includes, but not limited to, bulk NGS and single-cell sequencing, use of mouse models of brain tumors/metastasis, and sequencing and digital PCR for ctDNA detection in liquid biopsies.</p>
+                <ul>
+                  <li>Acquired skills in working with mice models to assess efficacy of novel therapies in a BSL-2 setting. This included engrafting subcutaneous, intrathoracic, and intracranial tumors into both immunocompetent and incompetent mice, and administering experimental therapies via intraperitoneal therapies and oral gavage</li>
+                  <li>Headed lab effort to apply previously acquired skills in the use of digital droplet PCR (ddPCR) for sensitive detection of rare events to determine if circulating tumor DNA (ctDNA) could be detected via ddPCR in mice models. Optimized workflow for cell-free DNA (cfDNA) extraction from low-volume mice plasma and developed and optimized ddPCR assays for the sensitive detection of mutations of interest</li>
+                  <li>Headed lab effort to establish a tissue clearing protocol for the enhanced visualization of brain-slice optical imaging in mouse model cohorts. This entailed a thorough literature review to determine how the strengths and drawbacks of different protocols related to our specific hypotheses</li>
+                  <li>Learned workflows and protocols for tissue acquisition and processing from operating rooms, clinic, and collaborators, in addition to the sample management system</li>
+                  <li>Attended clinical meetings such as Brain Metastasis Tumor Board, which included a multidisciplinary dialogue to determine best treatment options for patient cases at MGH with brain metastases</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThreer">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThreer" aria-expanded="false" aria-controls="panelsStayOpen-collapseThreer">
+                <h5 class="text-dark">NIH Post Baccalaureate IRTA Program (3100 hours) | July 2018 - June 2020</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThreer" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThreer">
+              <div class="accordion-body">
+                <small><i>Postbac Fellow | Bethesda, MD</i></small><br><br>
+
+                <p>Performed translational human immunology research under the guidance of Dr. Christopher Hourigan, discovering ways to detect, prevent and treat Acute Myeloid Leukemia (AML) and AML relapse. This included developing novel sequencing tools for the sensitive detection of residual disease in order to predict patients who may be at risk of relapse and whom may benefit from additional therapy.</p>
+                <ul>
+                  <li>Awarded Mission Bio grant challenge to develop and apply a novel, microfluidics-based,
+                    single-cell DNA sequencing technology in the context of relapsed/refractory AML. Developing and
+                    applying this technology was my primary project during my time at the NIH
+                  </li>
+                  <li>Lead projects regarding application of single-cell DNA sequencing applications in AML, Sickle Cell Disease (SCD), and Aplastic Anemia (AA). Also lead projects exploring the etiology of AML development in SCD patients receiving gene therapy, and AA patients receiving BM transplant (see publications)</li>
+                  <li>Awarded NIH's Orloff Science Award for "Work Demonstrating That Intervention for Acute Myeloid
+                    Leukemia Patients in Remission but With Genomic Evidence of Residual Disease Can Improve Survival"
+                  </li>
+                  <li>Collaborated with biomedical companies directly (Qiagen, Eppendorf, 10x, Mission Bio, Invitrogen)
+                    to help develop and apply their products to our research (e.g., sequencing panels)
+                  </li>
+                  <li>Developed wet lab protocols for Next Generation Sequence (NGS)-based residual disease detection. Streamlined workflow for bulk sequencing, including DNA isolation from patient whole blood to preparing patient’s DNA for NGS library preparation; lab skills include human sample processing from bone marrow and blood, operating automated liquid handlers, preparing bulk and single cell sequencing libraries, analyzing sequencing data, performing qPCR, ddPCR, and cell culturing</li>
+                  <li>Observed surgeries and procedures while obtaining samples (e.g., neurosurgery and bone marrow
+                    transplant)
+                  </li>
+                  <li>Attend classes in bioinformatics to analyze NGS and other data at the NIH’s graduate school (FAES)
+                    as well as presentations and conferences relevant to immunology and leukemia
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFourr">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFourr" aria-expanded="false" aria-controls="panelsStayOpen-collapseFourr">
+                <h5 class="text-dark">Dr. Wei-Tsung Lee’s Inorganic Chemistry Laboratory (3000-5000 hours) | August 2015 - June 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFourr" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFourr">
+              <div class="accordion-body">
+                <small><i>Laboratory Assistant | Chicago, IL</i></small><br><br>
+
+                <p>Applied synthetic and physical inorganic chemistry to address current challenges in areas such as coordination chemistry, medicinal inorganic chemistry, bioinorganic chemistry, and renewable energy. Completed advanced training in synthesis via designing and preparing molecular complexes, and in physical methods of spectroscopy (IR, NMR, UV, Evans Method), crystallography, and voltammetry.</p>
+                <ul>
+                  <li>Developed and fully characterized 12 novel inorganic nickel and vanadium complexes and developed a nickel system that helped uncover the mechanism of C-H bond activation in the nickel-nitridyl milieu
+                  </li>
+                  <li>Adept with operation and maintenance of nitrogen atmosphere glove box, wet glove box for anaerobic operation, solvent purification system, photoreactor, and gas addition apparatus</li>
+                  <li>Taught incoming undergraduate and graduate students proper laboratory safety and fundamental techniques of organic and inorganic synthesis</li>
+                  <li>Presented poster at Loyola Chemistry Department poster session, and at Loyola’s weekend of excellence</li>
+                  <li>Published two 1st author publications in addition to a third paper as a co-author</li>
+                  <li>Invited to submit cover art for Inorganic Chemistry Journal Volume 58, Issue 11</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Begin section for User Experience -->
+  <div class="container-fluid" id="user-experience">
+    <div class="container-fluid">
+      <div class="container-fluid p-5 bg-light rounded-3 text-center">
+        <div class="container-fluid" style="max-width: 75rem;">
+          <h1 class="text-dark">Other Experience</h1>
+          <p class="lead text-muted">Listed is other experience relevant to volunteer and leadership positions, including past jobs and employment. For more information, please contact Jack Ghannam!</p>
+        </div>
+      </div>
+      <div class="container-fluid pb-4" style="max-width: 75rem;">
+
+        <div class="accordion py-4" id="accordionPanelsStayOpenExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                <h5 class="text-dark">HMS Educational Representative | August 2020 - August 2021</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+              <div class="accordion-body">
+                <small><i>Educational Representative | Boston, MA</i></small><br><br>
+
+                <p>Work collaboratively with faculty to continuously innovate the HMS Pathways curriculum, representing the student body so that the curriculum is made both by and for the students. This includes both working with individual faculty on how to best engage the class, course faculty on how to structure entire modules, and the greater Educational Policy Curriculum Committee to steer the direction of the HMS curriculum.</p>
+                <ul>
+                  <li>As a Practice of Medicine lead Ed Rep, work with clinical faculty to enhance longitudinal clinical skills training for first year med students across Harvard Hospital sites</li>
+                  <li>Lead Ed Rep for the Transitions to the PCE course, which is the 5-week course that prepares medical students for their move from the classroom to the wards. Worked with faculty and students to make this as beneficial for students as possible, especially given the unique circumstances that our mostly virtual year posed</li>
+                  <li>As a Student Affairs Liaison, work with student affairs on projects ranging from how to best communicate with the student body, foster mentorship relationships between students and faculty, help students find meaningful research experiences, and address other wide-ranging aspects that student affairs covers</li>
+                  <li>ACollaboratedwith course faculty and the HMS administration to in-person classes during the COVID-19 pandemic to facilitate the phase-in of a hybrid model, and eventually full-time in-person classwork</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                <h5 class="text-dark">Crimson Care Collaborative at BIDMC | January 2021 - Present</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+              <div class="accordion-body">
+                <small><i>Junior Clinician | Boston, MA</i></small><br><br>
+
+                <p>CCC-BIDMC is a student-faculty chronic disease management and urgent care clinic that partners with primary care providers and specialists to serve patients with hypertension, diabetes mellitus, and obesity. CCC’s goal is to alleviate unmet needs for patients via a student-faculty collaborative clinic with intense supervision and quality benchmarks. Patients at CCC are identified by Healthcare Associates PCPs as requiring more intensive monitoring and individualized educational support.</p>
+                <ul>
+                  <li>As a Junior Clinician, work with Senior Clinician (M3/4) and attend 3-hour shifts once a week to conduct patient visits. Involved in all aspects of care, including calling patients about appointments, performing history and physical exam, following-up with patients on progress, and presenting patients to peers and faculty</li>
+                  <li>Establish new Telemedicine project to address Social Determinants of Health in patients with poorly controlled diabetes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                <h5 class="text-dark">John Warren Surgical Society | August 2020 - August 2021</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+              <div class="accordion-body">
+                <small><i>President | Boston, MA</i></small><br><br>
+
+                <p>The John Warren Surgical Society (JWSS) at Harvard Medical School was created to foster interest in the various fields of surgery among Harvard medical and dental students. As an all-encompassing surgical society, JWSS aims to provide resources in every surgical specialty and encourages students to explore these specialties through various events and programs throughout the four years of medical and dental school. Since its inception, the JWSS has provided resources to hundreds of medical and dental students who have gone on to match in residency.</p>
+                <ul>
+                  <li>As president, lead the organization in its mission by working with the E-Board and advisory faculty across Harvard hospitals to provide opportunities to expose students to the field of surgery</li>
+                  <li>This includes organizing panels with faculty and residence, case conferences with faculty, suturing workshops with residence and faculty, and being the host for the yearly banquet that invites over 200 surgeons and students to meet and network</li>
+                  <li>Led the organization of the First Annual JWSS Case Competition, where we paired 30 students with surgeons of all specialties across the Harvard hospitals to present a surgical case. Participants presented their work to a live audience of students and faculty and were judged by a panel of surgeons on the content and delivery of their presentation. This was an exciting opportunity to build a meaningful 1-on-1 mentoring relationship with a surgeon, learn more about the field of the surgery, and build on research, communication, and presentation skills</li>
+                  <li>Worked with Health Career Collaborative at HMS, which is closely tied with the American College of Surgeons to expose Boston High School students to medicine and surgery specifically</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                <h5 class="text-dark">Curriculum Author, COVID-19 Curriculum | August 2020 - Present</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+              <div class="accordion-body">
+                <small><i>Author, From Bench to Bedside Module | Boston, MA</i></small><br><br>
+
+                <p>The <a href="https://curriculum.covidstudentresponse.org/" target="_BLANK" class="text-primary">COVID-19 Curriculum</a> is a widely disseminated resource for up-to-date information on all aspects of COVID-19. It is widely used by hospitals and health professional schools across the country to train personnel on various aspects of COVID-19. It is run by graduate students at Harvard Medical School, in collaboration with expert faculty members across Harvard and MIT. Authors survey the rapidly evolving literature and continuously update specific modules in the curriculum. The From Bench to Beside Module addresses how the emerging understanding of COVID-19 pathophysiology translates to evolving diagnosis, treatment, and prevention efforts.</p>
+                <ul>
+                  <li>Work with fellow students and faculty to assess the impact and relevance of new basic and translational research related to COVID-19, and generating a curriculum aimed towards training current and future healthcare providers</li>
+                  <li>Collaborate with groups across the country, such as the POHPS COVID-19 podcast to convert the curriculum to audio form and conduct interviews with experts studying COVID-19</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                <h5 class="text-dark">Harvard/MIT MD-PhD Steering Committee	| September 2020 - Present</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+              <div class="accordion-body">
+                <small><i>Steering Committee Member | Boston, MA</i></small><br><br>
+                <p>Work with MD-PhD program leaders to help guide decision-making regarding many aspects of the program, ranging from addressing social justice, ensuring student satisfaction, and organizing various social and scientific events. A major component of the committee is to continuously take the pulse of student health and well-being and make recommendations to optimize students’ sense of belonging and connection at HMS.</p>
+                <ul>
+                  <li>Meet with Program Director, Director of Administration, and other students to provide feedback and various points of concern</li>
+                  <li>Advance initiatives for the betterment of the Harvard/MIT MD-PhD student experience</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+                <h5 class="text-dark">NIH Academy Fellow (4000+ hours) | October 2018 - May 2020</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+              <div class="accordion-body">
+                <small><i>Fellow | Bethesda, MD</i></small><br><br>
+                <p>Attended NIH Academy seminars, participated in learning opportunities that included information on health disparities, advanced the knowledge of gaps in health outcomes, and investigated what is being done to address health disparity issues. The NIH Academy trains future researchers and physician scientists to actively engage in promoting a society in which all people live healthy lives and have equal access to health care. </p>
+                <ul>
+                  <li>Attended the NIH Academy retreat, eight NIH Academy career panels, and present a community project</li>
+                  <li>Engaged in community outreach activities such as the AIDS walk, volunteering at the DC Central Kitchen, and distributing HIV/AIDS related health brochures at the Langley Park Hispanic Festival</li>
+                  <li>Established a community outreach project that involves working with the United Nations Relief and Works Agency (UNRWA) to increase health literacy in refugee camps in and around Israel</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
+                <h5 class="text-dark">Emergency Medical Services (1000 Clinical, 250 Admin hours) | August 2015 - May 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
+              <div class="accordion-body">
+                <small><i>EMT & Supervisor, Loyola University | Chicago, IL</i></small><br><br>
+                <p>Completed training in basic life support during an emergency, treating both medical and traumatic emergencies in prehospital settings. As shift supervisor, oversaw calls and all aspects of shift duties. Led the move between bases, organized layout of new base, and coordinated move with campus safety.</p>
+                <ul>
+                  <li>Responded to both medical and traumatic calls during fourteen-hour shifts</li>
+                  <li>Transferred care to Chicago Fire Department for hospital transport</li>
+                  <li>Proctored a 6-hour weekly EMT class, teaching student’s practical skills and emulating patients</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingEight">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
+                <h5 class="text-dark">E-Board Member: Training Coordinator & Equipment/Base Coordinator | May 2017 - May 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
+              <div class="accordion-body">
+                <p>As Training Coordinator, created monthly trainings, administered trainings, conducted training audits, and revamped both the online and in-base trainings. Rode along with a CFD ambulance for two 24-hours shifts and worked as an EMT for the Chicago marathon and the hot chocolate run providing BLS with other providers. As equipment and base coordinator, ordered new supplies, fixed broken supplies, while ensuring the base was functioning well. Coordinated the location move of the base and organized the ordering of optional job shirts.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingNine">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseNine" aria-expanded="false" aria-controls="panelsStayOpen-collapseNine">
+                <h5 class="text-dark">New Life Volunteering Society (250 hours) | January 2016 - May 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseNine" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingNine">
+              <div class="accordion-body">
+                <small><i>Co-President | Chicago, IL</i></small><br><br>
+                <p>Mentored and tutored children in mentor/child pairs from the Chicago Youth Program once a week, with the goal of inspiring students to value academic success and act as role models. Collaborated in the NLVS free clinic to send volunteers to organize public health presentations for the clinic.</p>
+                <ul>
+                  <li>•	Invited children from Perspectives Charter Schools to screen their documentary, “I am for peace” and discussed violence in their neighborhoods with members of the Loyola community</li>
+                  <li>•	Worked with medical students from Loyola’s Stritch School of Medicine to conduct blood pressure screenings with local patient population</li>
+                  <li>•	Wrote health information documents to offer in the NLVS free clinic’s waiting room</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTen">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false" aria-controls="panelsStayOpen-collapseTen">
+                <h5 class="text-dark">Community Health Free Clinic (150 hours) | December 2015 - May 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTen">
+              <div class="accordion-body">
+                <small><i>Triage Volunteer/Trainer | Chicago, IL</i></small><br><br>
+                <p>Called patients into room, verified identity, and monitored for signs of immediate life threat. Trained new volunteers to triage patients, including quarterly training dates with 10-15 volunteers at a time.</p>
+                <ul>
+                  <li>•	Recorded vitals on patients, including blood pressure, pulse, temperature, height, and weight</li>
+                  <li>•	Escorted patients to and from rooms to see physicians</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingEleven">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEleven" aria-expanded="false" aria-controls="panelsStayOpen-collapseEleven">
+                <h5 class="text-dark">United Nations Relief and Works Agency Medical Mission (4 weeks total) | July 2018 - April 2019</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseEleven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEleven">
+              <div class="accordion-body">
+                <small><i>Volunteer EMT and U.N. Medical Aid Volunteer | Israel</i></small><br><br>
+                <p>Assisted in the implementation of telemedicine and tele-education in refugee camp hospitals in and around Israel. Demonstrated the benefits of telemedicine and tele-education to UN officials at refugee camp clinics.</p>
+                <ul>
+                  <li>•	Traveled to refugee camps in and around Israel and helped lead the distribution of dental kits to children and taught the children how to properly brush and floss</li>
+                  <li>•	Assisted in establishing the dental branch of medical missions, and currently help with the recruitment of dentists to do pro-bono work during next year’s mission</li>
+                  <li>•	Fundraised for the medical mission at a local church in Michigan and at an annual golf outing in California</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwelve">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwelve" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwelve">
+                <h5 class="text-dark">Illinois Advocate Masonic Medical Center (105 hours) | May 2015 - May 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwelve">
+              <div class="accordion-body">
+                <small><i>Wayfinder | Chicago, IL</i></small><br><br>
+                <p>Helped Patients navigate hospital campus. Managed a wide variety of patient services and administrative duties to resolve issues quickly and efficiently. Resolved patient issues when applicable, delegating to the proper hospital departments. </p>
+                <ul>
+                  <li>•	Managed patient services, performed administrative duties, worked as receptionist, and registered patients</li>
+                  <li>•	Delivered flowers and presents to patient’s rooms as well as assisted with volunteer orientation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThirteen">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThirteen" aria-expanded="false" aria-controls="panelsStayOpen-collapseThirteen">
+                <h5 class="text-dark">Maroon and Gold Society at Loyola University Chicago (50 hours) | April 2017 - April 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThirteen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThirteen">
+              <div class="accordion-body">
+                <small><i>Member | Chicago, IL</i></small><br><br>
+                <p>Engaged in student ambassadorship at major university functions and events. Spoke on panels to represent student voiced during conversations related to academic experience at Loyola.</p>
+                <ul>
+                  <li>•	Engage in strategic community partnership, coordinate day of service as part of the Senior send-off event</li>
+                  <li>•	Provided leadership for philanthropic initiatives and advises Alumni Relations </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFourteen">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFourteen" aria-expanded="false" aria-controls="panelsStayOpen-collapseFourteen">
+                <h5 class="text-dark">American Chemical Society	| August 2015 - May 2018</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFourteen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFourteen">
+              <div class="accordion-body">
+                <small><i>Tutor | Chicago, IL</i></small><br><br>
+                <p>Taught general chemistry, organic chemistry, and biochemistry. Worked with undergraduate students on essays, test papers, research, and post-graduate programs.</p>
+                <ul>
+                  <li>•	Presented research at ACS general body meetings</li>
+                  <li>•	Participated in ACS activities and demonstrations</li>    
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFifteen">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFifteen" aria-expanded="false" aria-controls="panelsStayOpen-collapseFifteen">
+                <h5 class="text-dark">Loyola University Spacetime Astronomy and Relativity (300 hours) | August 2015 - May 2016</h5><br />
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFifteen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFifteen">
+              <div class="accordion-body">
+                <small><i>E-Board Member and Co-Founder | Chicago, IL</i></small><br><br>
+                <p>Led meetings with E-Board members. Coordinated events with other organizations and academic groups. Filed all documentation for the organization while managing social media pages.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Begin section for Awards -->
+  <div class="container-fluid" id="user-awards">
+    <div class="container-fluid">
+      <div class="container-fluid p-5 bg-light rounded-3 text-center">
+        <div class="container-fluid" style="max-width: 75rem;">
+          <h1 class="text-dark">Honors</h1>
+          <p class="lead text-muted">Listed are various awards, fellowships, honorary memberships, and achievements. For more information, please contact Jack Ghannam!</p>
+        </div>
+      </div>
+      <div class="container-fluid py-4" style="max-width: 75rem;">
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-success">Award</strong>
+                <h3 class="mb-0">Fr. Morrissey Medal</h3>
+                <div class="mb-1 text-muted">Loyola</div>
+                <p class="card-text mb-auto">Fr. Morrissey Medals is awarded to the most outstanding student in each year’s group of chemistry majors enrolled in the majors classes.</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" src="img/award-1-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+      
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Fellow</strong>
+                <h3 class="mb-0">NIH Academy Fellow</h3>
+                <div class="mb-1 text-muted">NIH</div>
+                <p class="mb-auto">NIH Academy Fellows is for participants who are passionate about a career incorporating Health Disparities.</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" src="img/award-2-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Fellow</strong>
+                <h3 class="mb-0">Provost Fellow for Research</h3>
+                <div class="mb-1 text-muted">Loyola</div>
+                <p class="card-text mb-auto">Provost Fellows engage with university-wide academic initiatives, implementation of strategic resources, and challenges in higher education.</p><br>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" src="img/award-3-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+      
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Fellow</strong>
+                <h3 class="mb-0">Mulcahy Scholar Fellow</h3>
+                <div class="mb-1 text-muted">Loyola</div>
+                <p class="mb-auto">Fellows work with faculty members on projects of scholarly significance that reflect the diversity of academic activity throughout the College of Arts and Sciences (CAS).</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" src="img/award-4-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-danger">Member</strong>
+                <h3 class="mb-0">Alpha Sigma Nu Honor Society</h3>
+                <div class="mb-1 text-muted">Loyola</div>
+                <p class="card-text mb-auto">Recognizes students who distinguish themselves in scholarship, loyalty, and service.</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" style="max-height: 230px;" src="img/award-5-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+      
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-success">Award</strong>
+                <h3 class="mb-0">Loyola Dean’s Scholarship Recipient</h3>
+                <div class="mb-1 text-muted">Loyola</div>
+                <p class="mb-auto">These prestigious merit awards tend to go to students in the top 1% to 5% of their class.</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" src="img/award-6-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-danger">Member</strong>
+                <h3 class="mb-0">Maroon & Gold Society</h3>
+                <div class="mb-1 text-muted">Loyola</div>
+                <p class="card-text mb-auto">Recognizes rising seniors who have demonstrated a commitment to leadership, academic excellence, and service to others.</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" src="img/award-7-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+      
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-success">Award</strong>
+                <h3 class="mb-0">Mission Bio Grant Recipient</h3>
+                <div class="mb-1 text-muted">NIH</div>
+                <p class="mb-auto">Provides researchers a precision genomics platform to support the discovery, development and delivery of precision medicine</p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img width="200" height="100%" src="img/award-8-cover.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Content for Footer Bar -->
+  <div class="bg-dark text-lg-start text-muted p-3">
+    <!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-2 mt-md-0 mt-3 ms-2"></div>
+      <div class="col-md-2 mt-md-0 mt-3 ps-5 mx-4">
+
+        <!-- Content -->
+        <h5 class="text-uppercase text-white"><i class="fas fa-id-badge"></i> Jack Ghannam</h5>
+        <p class="ps-2">Harvard University<br>
+          Medical School<br>
+          25 Shattuck Street, Boston, MA<br>
+          ghannamjy@gmail.com<br>
+          </p>
+      </div>
+
+      <div class="col-md-2 mb-md-0 mb-3 mx-5 d-none d-lg-block">
+
+        <!-- Links -->
+        <h5 class="text-uppercase text-white"><i class="fas fa-pen"></i> Recent Publications</h5>
+
+        <ul class="list-unstyled ps-2">
+          <li class="mb-1">
+            <a href="https://experts.umn.edu/en/publications/impact-of-conditioning-intensity-of-allogeneic-transplantation-fo">Impact of conditioning intensity...</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!" >A Series of 4-and 5-Coordinate...</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!" >Baseline TP53 mutations in adults...</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!" >Intramolecular C–H Functionalizati...</a>
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- Grid column -->
+      <div class="col-md-1 mb-md-0 mb-3 mx-5 d-none d-lg-block">
+
+        <!-- Links -->
+        <h5 class="text-uppercase text-white"><i class="fas fa-link"></i> Quick Links</h5>
+
+        <ul class="list-unstyled ps-2">
+          <li class="mb-1">
+            <a href="#!">Publications</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!">Research</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!">Experience</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!">Honors</a>
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-md-0 mb-3 mx-3 d-none d-lg-block">
+
+        <!-- Links -->
+        <h5 class="text-uppercase text-white"><i class="fas fa-address-book"></i> Contact</h5>
+
+        <ul class="list-unstyled ps-2">
+          <li class="mb-1">
+            <a href="#!">Email</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!">Google Scholar</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!">ORCID</a>
+          </li>
+          <li class="mb-1">
+            <a href="#!">NIH</a>
+          </li>
+        </ul>
+
+      </div>
+
+      
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+</footer>
+<!-- Footer -->
+  </div>
+</body>
+
 </html>

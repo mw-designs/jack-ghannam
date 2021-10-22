@@ -1,19 +1,12 @@
-$('#user-publication-link').click(function(e){    
-    $('#user-bio-main').stop().fadeOut('slow', function(){
-        $('#user-research').hide();
-        $('#user-bio-main').removeClass('d-flex');
-        $('#user-publication-link').addClass('active');
-        $('#user-research-link').removeClass('active');
-        $('#user-home-link').removeClass('active');
-        $('#user-publications').fadeIn('slow');
-    });
-});
-
 $('#user-home-link').click(function(e){    
     $('#user-publications').stop().fadeOut('slow', function(){
         $('#user-research').hide();
+        $('#user-experience').hide();
+        $('#user-awards').hide();
         $('#user-publication-link').removeClass('active');
         $('#user-research-link').removeClass('active');
+        $('#user-experience-link').removeClass('active');
+        $('#user-awards-link').removeClass('active');
         $('#user-home-link').addClass('active');
         $('#user-bio-main').addClass('d-flex');
         $('#user-publications').hide();
@@ -21,14 +14,63 @@ $('#user-home-link').click(function(e){
     });
 });
 
+$('#user-publication-link').click(function(e){    
+    $('#user-bio-main').stop().fadeOut('slow', function(){
+        $('#user-research').hide();
+        $('#user-experience').hide();
+        $('#user-awards').hide();
+        $('#user-bio-main').removeClass('d-flex');
+        $('#user-home-link').removeClass('active');
+        $('#user-research-link').removeClass('active');
+        $('#user-experience-link').removeClass('active');
+        $('#user-awards-link').removeClass('active');
+        $('#user-publication-link').addClass('active');
+        $('#user-publications').fadeIn('slow');
+    });
+});
+
 $('#user-research-link').click(function(e){    
     $('#user-bio-main').stop().fadeOut('slow', function(){
-        $('#user-bio-main').removeClass('d-flex');
+        $('#user-experience').hide();
         $('#user-publications').hide();
-        $('#user-research-link').addClass('active');
+        $('#user-awards').hide();
+        $('#user-bio-main').removeClass('d-flex');
         $('#user-home-link').removeClass('active');
         $('#user-publication-link').removeClass('active');
+        $('#user-experience-link').removeClass('active');
+        $('#user-awards-link').removeClass('active');
+        $('#user-research-link').addClass('active');
         $('#user-research').fadeIn('slow');
+    });
+});
+
+$('#user-experience-link').click(function(e){    
+    $('#user-bio-main').stop().fadeOut('slow', function(){
+        $('#user-research').hide();
+        $('#user-awards').hide();
+        $('#user-bio-main').removeClass('d-flex');
+        $('#user-publications').hide();
+        $('#user-experience-link').addClass('active');
+        $('#user-home-link').removeClass('active');
+        $('#user-research-link').removeClass('active');
+        $('#user-publication-link').removeClass('active');
+        $('#user-awards-link').removeClass('active');
+        $('#user-experience').fadeIn('slow');
+    });
+});
+
+$('#user-awards-link').click(function(e){    
+    $('#user-bio-main').stop().fadeOut('slow', function(){
+        $('#user-research').hide();
+        $('#user-publications').hide();
+        $('#user-experience').hide();
+        $('#user-awards-link').addClass('active');
+        $('#user-bio-main').removeClass('d-flex');
+        $('#user-home-link').removeClass('active');
+        $('#user-experience-link').removeClass('active');
+        $('#user-research-link').removeClass('active');
+        $('#user-publication-link').removeClass('active');
+        $('#user-awards').fadeIn('slow');
     });
 });
 

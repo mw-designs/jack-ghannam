@@ -43,6 +43,20 @@
     background-color:black !important;
 }
 
+span {
+    text-align: justify;
+    display: block;
+}
+
+a, a:hover {
+    text-decoration: none;
+    z-index: 10;
+  }
+  
+a:hover {
+    opacity: 0.8;
+}
+
 #user-publications {
     display: none;
 }
@@ -51,8 +65,11 @@
     display: none;
 }
 
-span {
-    text-align: justify;
-    display: block;
+#user-experience {
+    display: none;
+}
+
+#user-awards {
+    display: none;
 }
 
